@@ -12,7 +12,7 @@
     {
       "matches": [
         "https://maang.in/*",
-        "https://leetcode.com/problems/*",
+        "https://leetcode.com/*",
         "https://www.geeksforgeeks.org/problems/*",
         "https://cses.fi/problemset/task/*",
         "https://www.codechef.com/problems/*"
