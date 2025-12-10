@@ -3,7 +3,7 @@ const key = "xxxSecretxxx";
 
 async function addBookmark(){
     const url = window.location.href;
-    const problemTitle = document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0].innerText;
+    const problemTitle = getProblemTitle();
     const obj = {
         title: problemTitle,
         url: url
@@ -21,6 +21,14 @@ async function addBookmark(){
     }
     // console.log(problemTitle);
 }
+function getProblemTitle(){
+    if(window.location.href.includes("maang.in/problems")){
+        return getProblemTitleFromMaang();
+    }
+}
+function getProblemTitleFromMaang(){
+    return document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0].innerText;
+}
 function diaplaySaveProblemButton(){
     // console.log("Trigger");
     if(document.getElementById("bookmark-icon"))return;
@@ -35,12 +43,14 @@ function diaplaySaveProblemButton(){
     createNewBookmarkImageElement.addEventListener('click',addBookmark);
 
     if(currentURL.includes("maang.in/problems") == true){
-        const title = this.document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0];
-        title.parentNode.parentNode.insertBefore(createNewBookmarkImageElement,title.parentNode.nextSibling);
+        addSaveBookmarkIconToMaang(createNewBookmarkImageElement);
     }
-
+    
 }
-
+function addSaveBookmarkIconToMaang(createNewBookmarkImageElement){
+    const title = this.document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0];
+    title.parentNode.parentNode.insertBefore(createNewBookmarkImageElement,title.parentNode.nextSibling);
+}
  function getCurrentBookMarks(){
     return new Promise(function(resolve,reject){
         chrome.storage.local.get([key],function(result){
