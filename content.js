@@ -61,6 +61,11 @@ function diaplaySaveProblemButton(){
         addSaveBookmarkIconToGeeksForGeeks(createNewBookmarkImageElement);
         createNewBookmarkImageElement.style.marginTop = "10px";
     }
+    else if(currentURL.includes("cses.fi/problemset/task") == true){
+        addSaveBookmarkIconToGeeksForCses(createNewBookmarkImageElement);
+        createNewBookmarkImageElement.style.marginTop = "10px";
+        createNewBookmarkImageElement.style.marginBottom = "10px";
+    }
     
 }
 
@@ -76,6 +81,10 @@ function addSaveBookmarkIconToGeeksForGeeks(createNewBookmarkImageElement){
     const elementTarget = this.document.getElementsByClassName("problems_header_description__t_8PB")[0];
     elementTarget.insertAdjacentElement('afterend',createNewBookmarkImageElement);
 }
+function addSaveBookmarkIconToGeeksForCses(createNewBookmarkImageElement){
+    const elementTarget = this.document.getElementsByClassName("title-block")[0];
+    elementTarget.appendChild(createNewBookmarkImageElement);
+}
 
 function getProblemTitle(){
     if(window.location.href.includes("maang.in/problems")){
@@ -87,6 +96,9 @@ function getProblemTitle(){
     else if(window.location.href.includes("geeksforgeeks.org/problems")){
         return getProblemTitleFromGeeksForGeeks();
     }
+    else if(window.location.href.includes("cses.fi/problemset/task")){
+        return getProblemTitleFromCses();
+    }
 }
 function getProblemTitleFromLeetCode(){
    return document.getElementsByClassName("text-title-large")[0].firstElementChild.innerHTML;
@@ -97,4 +109,8 @@ function getProblemTitleFromMaang(){
 }
 function getProblemTitleFromGeeksForGeeks(){
     return document.getElementsByClassName("g-m-0")[0].innerText;
+}
+function getProblemTitleFromCses(){
+    elementTarget = document.querySelector('.title-block h1');
+    return elementTarget.innerText;
 }
