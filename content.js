@@ -55,6 +55,11 @@ function diaplaySaveProblemButton(){
     else if(currentURL.includes("leetcode.com/problems") == true){
         addSaveBookmarkIconToLeetCode(createNewBookmarkImageElement);
         console.log("LeetCode");
+        createNewBookmarkImageElement.style.marginBottom = "10px";
+    }
+    else if(currentURL.includes("geeksforgeeks.org/problems") == true){
+        addSaveBookmarkIconToGeeksForGeeks(createNewBookmarkImageElement);
+        createNewBookmarkImageElement.style.marginTop = "10px";
     }
     
 }
@@ -67,6 +72,10 @@ function addSaveBookmarkIconToLeetCode(createNewBookmarkImageElement){
     const elementTarget = this.document.getElementsByClassName("elfjS")[0];
     elementTarget.prepend(createNewBookmarkImageElement);
 }
+function addSaveBookmarkIconToGeeksForGeeks(createNewBookmarkImageElement){
+    const elementTarget = this.document.getElementsByClassName("problems_header_description__t_8PB")[0];
+    elementTarget.insertAdjacentElement('afterend',createNewBookmarkImageElement);
+}
 
 function getProblemTitle(){
     if(window.location.href.includes("maang.in/problems")){
@@ -75,6 +84,9 @@ function getProblemTitle(){
     else if(window.location.href.includes("leetcode.com/problems")){
         return getProblemTitleFromLeetCode();
     }
+    else if(window.location.href.includes("geeksforgeeks.org/problems")){
+        return getProblemTitleFromGeeksForGeeks();
+    }
 }
 function getProblemTitleFromLeetCode(){
    return document.getElementsByClassName("text-title-large")[0].firstElementChild.innerHTML;
@@ -82,4 +94,7 @@ function getProblemTitleFromLeetCode(){
 }
 function getProblemTitleFromMaang(){
     return document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0].innerText;
+}
+function getProblemTitleFromGeeksForGeeks(){
+    return document.getElementsByClassName("g-m-0")[0].innerText;
 }
