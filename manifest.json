@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://maang.in/problems/*",
+        "https://maang.in/*",
         "https://leetcode.com/problems/*",
         "https://www.geeksforgeeks.org/problems/*",
         "https://cses.fi/problemset/task/*",

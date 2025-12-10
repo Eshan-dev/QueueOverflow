@@ -1,0 +1,12 @@
+html{
+    min-width: 300px;
+}
+.title{
+    font-size:  14px;
+    color: darkblue;
+    font-weight: bold;
+}
+#titleContainer{
+    display: flex;
+    justify-content: center;
+}
