@@ -1,4 +1,4 @@
-const bookmarkIconURL = chrome.runtime.getURL("assets/bookmark.png");
+const bookmarkImgURL = chrome.runtime.getURL("assets/bookmark.png");
 const key = "xxxSecretxxx";
 
 async function addBookmark(){
@@ -21,22 +21,22 @@ async function addBookmark(){
     }
     // console.log(problemTitle);
 }
-function showButton(){
-    console.log("Trigger");
+function diaplaySaveProblemButton(){
+    // console.log("Trigger");
     if(document.getElementById("bookmark-icon"))return;
-    const bookmark = this.document.createElement("img");
+    const createNewBookmarkImageElement = this.document.createElement("img");
     let currentURL = window.location.href;
 
-    bookmark.id = "bookmark-icon";
-    bookmark.src = bookmarkIconURL;
-    bookmark.style.width = "30px";
-    bookmark.style.width = "30px";
+    createNewBookmarkImageElement.id = "bookmark-icon";
+    createNewBookmarkImageElement.src = bookmarkImgURL;
+    createNewBookmarkImageElement.style.width = "30px";
+    createNewBookmarkImageElement.style.width = "30px";
 
-    bookmark.addEventListener('click',addBookmark);
+    createNewBookmarkImageElement.addEventListener('click',addBookmark);
 
     if(currentURL.includes("maang.in/problems") == true){
         const title = this.document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0];
-        title.parentNode.parentNode.insertBefore(bookmark,title.parentNode.nextSibling);
+        title.parentNode.parentNode.insertBefore(createNewBookmarkImageElement,title.parentNode.nextSibling);
     }
 
 }
@@ -52,7 +52,7 @@ function showButton(){
 
 const observer = new MutationObserver(function(){
     // observer.disconnect(); 
-    showButton();
+    diaplaySaveProblemButton();
 })
 observer.observe(document.body,{childList:true,subtree:true});
-showButton();
+diaplaySaveProblemButton();
