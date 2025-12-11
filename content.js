@@ -62,14 +62,12 @@ function diaplaySaveProblemButton(){
         createNewBookmarkImageElement.style.marginTop = "10px";
     }
     else if(currentURL.includes("cses.fi/problemset/task") == true){
-        addSaveBookmarkIconT
-    rCses(createNewBookmarkImageElement);
+        addSaveBookmarkIconToCses(createNewBookmarkImageElement);
         createNewBookmarkImageElement.style.marginTop = "10px";
         createNewBookmarkImageElement.style.marginBottom = "10px";
     }
     else if(currentURL.includes("codechef.com/") == true && currentURL.includes("/problems/") == true   ){
-        addSaveBookmarkIconTo
-    CodeChef(createNewBookmarkImageElement);
+        addSaveBookmarkIconToCodeChef(createNewBookmarkImageElement);
     }
     
 }
