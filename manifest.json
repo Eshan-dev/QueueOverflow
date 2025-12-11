@@ -21,6 +21,8 @@
       "js": [
         "content.js"
       ]
+      ,
+      "type": "module"
     }
   ],
   "background": {
@@ -29,7 +31,8 @@
   "web_accessible_resources" : [
     {
       "resources": [
-        "assets/*.png"
+        "assets/*.png",
+        "bookmark.js" 
       ],
       "matches" : ["<all_urls>"]
     }
