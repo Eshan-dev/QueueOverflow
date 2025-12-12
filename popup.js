@@ -61,6 +61,7 @@ function openUrl(){
     window.open(url, '_blank');
 }
 async function deleteBookmark(){
+    doAuth();
     const url = this.previousSibling.previousSibling.href;
     console.log(url);
 
@@ -69,4 +70,21 @@ async function deleteBookmark(){
     return bookmark.url !== url;}
     )
     await setBookmarks(newBookmarks);
+}
+
+const CLIENT_ID = "546067484138-o5h7nuv4sg2di26qruuc53ijl9uhqal0.apps.googleusercontent.com";
+const REDIRECT_URL = "http://localhost:3000/auth/google/callback";
+
+const authUrl = `
+https://accounts.google.com/o/oauth2/v2/auth?
+client_id=${CLIENT_ID}&
+response_type=code&
+redirect_uri=${encodeURIComponent(REDIRECT_URL)}&
+scope=openid%20email%20profile&
+access_type=offline&
+prompt=consent
+`;
+
+function doAuth(){
+    chrome.tabs.create({ url: authUrl });
 }

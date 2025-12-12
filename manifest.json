@@ -45,5 +45,10 @@
     },
     "default_popup": "popup.html",
     "default_title": "QueueOverflow"
+    ,
+    "permissions": [
+      "identity"
+    ]
+  
   }
 }
