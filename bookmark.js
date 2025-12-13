@@ -1,4 +1,18 @@
-const bookmarkImgURL = chrome.runtime.getURL("assets/bookmark.png");
+const bookmarkButton = document.createElement('button');
+const sheetButton = document.createElement('button');
+
+bookmarkButton.id = "bookmark-icon";
+sheetButton.id = "sheet-icon";
+
+bookmarkButton.style.border = "2px solid grey";
+bookmarkButton.style.width = "200px";
+sheetButton.style.border = "2px solid grey";
+sheetButton.style.width = "200px";
+
+
+bookmarkButton.innerText = "Add to bookmark";
+sheetButton.innerText = "Add to Sheet";
+
 const key = "xxxSecretxxx";
 
 export function startObserving(){
@@ -9,6 +23,7 @@ export function startObserving(){
     observer.observe(document.body,{childList:true,subtree:true});
     diaplaySaveProblemButton();
 }
+
 
 
 function getCurrentBookMarks(){
@@ -42,61 +57,66 @@ async function addBookmark(){
 function diaplaySaveProblemButton(){
     // console.log("Trigger");
     if(document.getElementById("bookmark-icon"))return;
-    const createNewBookmarkImageElement = document.createElement("img");
+    
+    const buttonContainer = document.createElement('div');
+    buttonContainer.id = "buttonContainer";
+    buttonContainer.appendChild(bookmarkButton);
+    buttonContainer.appendChild(sheetButton);
+    bookmarkButton.addEventListener('click',function(e){
+            e.currentTarget.innerText="Added to Bookmarks"
+    })
+    sheetButton.addEventListener('click',createSheetPopup);
+    buttonContainer.addEventListener('click',addBookmark);
+
+
+
     let currentURL = window.location.href;
     
-    createNewBookmarkImageElement.id = "bookmark-icon";
-    createNewBookmarkImageElement.src = bookmarkImgURL;
-    createNewBookmarkImageElement.style.width = "30px";
-    createNewBookmarkImageElement.style.width = "30px";
-    
-    createNewBookmarkImageElement.addEventListener('click',addBookmark);
-    
     if(currentURL.includes("maang.in/problems") == true){
-        addSaveBookmarkIconToMaang(createNewBookmarkImageElement);
+        addSaveBookmarkIconToMaang(buttonContainer);
     }
     else if(currentURL.includes("leetcode.com/problems") == true){
-        addSaveBookmarkIconToLeetCode(createNewBookmarkImageElement);
+        addSaveBookmarkIconToLeetCode(buttonContainer);
         console.log("LeetCode");
-        createNewBookmarkImageElement.style.marginBottom = "10px";
+        buttonContainer.style.marginBottom = "10px";
     }
     else if(currentURL.includes("geeksforgeeks.org/problems") == true){
-        addSaveBookmarkIconToGeeksForGeeks(createNewBookmarkImageElement);
-        createNewBookmarkImageElement.style.marginTop = "10px";
+        addSaveBookmarkIconToGeeksForGeeks(buttonContainer);
+        buttonContainer.style.marginTop = "10px";
     }
     else if(currentURL.includes("cses.fi/problemset/task") == true){
-        addSaveBookmarkIconToCses(createNewBookmarkImageElement);
-        createNewBookmarkImageElement.style.marginTop = "10px";
-        createNewBookmarkImageElement.style.marginBottom = "10px";
+        addSaveBookmarkIconToCses(buttonContainer);
+        buttonContainer.style.marginTop = "10px";
+        buttonContainer.style.marginBottom = "10px";
     }
     else if(currentURL.includes("codechef.com/") == true && currentURL.includes("/problems/") == true   ){
-        addSaveBookmarkIconToCodeChef(createNewBookmarkImageElement);
+        addSaveBookmarkIconToCodeChef(buttonContainer);
     }
     
 }
 
-function addSaveBookmarkIconToMaang(createNewBookmarkImageElement){
+function addSaveBookmarkIconToMaang(buttonContainer){
     const title = document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0];
-    title.parentNode.parentNode.insertBefore(createNewBookmarkImageElement,title.parentNode.nextSibling);
+    title.parentNode.parentNode.insertBefore(buttonContainer,title.parentNode.nextSibling);
 }
-function addSaveBookmarkIconToLeetCode(createNewBookmarkImageElement){
+function addSaveBookmarkIconToLeetCode(buttonContainer){
     const elementTarget = document.getElementsByClassName("elfjS")[0];
-    elementTarget.prepend(createNewBookmarkImageElement);
+    elementTarget.prepend(buttonContainer);
 }
-function addSaveBookmarkIconToGeeksForGeeks(createNewBookmarkImageElement){
+function addSaveBookmarkIconToGeeksForGeeks(buttonContainer){
     const elementTarget = document.getElementsByClassName("problems_header_description__t_8PB")[0];
-    elementTarget.insertAdjacentElement('afterend',createNewBookmarkImageElement);
+    elementTarget.insertAdjacentElement('afterend',buttonContainer);
 }
-function addSaveBookmarkIconToCses(createNewBookmarkImageElement){
+function addSaveBookmarkIconToCses(buttonContainer){
     const elementTarget = document.getElementsByClassName("title-block")[0];
-    elementTarget.appendChild(createNewBookmarkImageElement);
+    elementTarget.appendChild(buttonContainer);
 }
-function addSaveBookmarkIconToCodeChef(createNewBookmarkImageElement){
+function addSaveBookmarkIconToCodeChef(buttonContainer){
     const elementTarget = document.getElementsByClassName("_fullscreen-clickable__container_10e0b_131")[0];
-    elementTarget.prepend(createNewBookmarkImageElement);
+    elementTarget.prepend(buttonContainer);
     elementTarget.style.width =  "100%";
     elementTarget.style.justifyContent = "space-between";
-    createNewBookmarkImageElement.style.marginLeft = "15px";
+    buttonContainer.style.marginLeft = "15px";
 }
 
 function getProblemTitle(){
@@ -133,4 +153,104 @@ function getProblemTitleFromCses(){
 function getProblemTitleFromCodeChef(){
     const elementTarget = document.getElementById("problem-statement");
     return elementTarget.firstElementChild.innerText;
+}
+function createSheetPopup(){
+    if(document.getElementById('formContainer')){
+        return;
+    }
+    const formContainer = document.createElement('div');
+    const solveStatus   = document.createElement('textarea');
+    const timeTaken = document.createElement('textarea');
+    const concept = document.createElement('textarea');
+    const framework = document.createElement('textarea');
+    const form = document.createElement('textarea');
+    const tatic = document.createElement('textarea');
+    const debug = document.createElement('textarea');
+    const solutionSummary = document.createElement('textarea');
+    const notes = document.createElement('textarea');
+    const buttton = document.createElement('button');
+
+
+    formContainer.appendChild(solveStatus);
+    formContainer.appendChild(timeTaken);
+    formContainer.appendChild(concept);
+    formContainer.appendChild(framework);
+    formContainer.appendChild(form);
+    formContainer.appendChild(tatic);
+    formContainer.appendChild(debug);
+    formContainer.appendChild(solutionSummary);
+    formContainer.appendChild(notes);
+    formContainer.appendChild(buttton);
+    formContainer.id = "formContainer";
+    
+    buttton.innerText = "Push To Sheet";
+    buttton.id = "pushButton";
+    buttton.addEventListener('click',pushToSheet);
+    // buttton.innerText = "Push To Sheet";
+    solveStatus.placeholder = `AC/WA/TLE/Not Understood(Type here ....)`
+    solveStatus.style.border = "2px solid grey" 
+    timeTaken.placeholder = "Time Taken"
+    timeTaken.style.border = "2px solid grey" 
+    concept.placeholder = "Concept/Topic"
+    concept.style.border = "2px solid grey" 
+    framework.placeholder = "How to think about this question"
+    framework.style.border = "2px solid grey" 
+    form.placeholder = "to which form this question belongs"
+    form.style.border = "2px solid grey" 
+    tatic.placeholder = "Any Quick Tricks"
+    tatic.style.border = "2px solid grey" 
+    debug.placeholder = "Mistakes Made"
+    debug.style.border = "2px solid grey" 
+    solutionSummary.placeholder = "Some Implementation details"
+    solutionSummary.style.border = "2px solid grey" 
+    notes.placeholder = "Something Extra?"
+    notes.style.border = "2px solid grey" 
+
+    formContainer.style.display =  "flex";
+    formContainer.style.flexDirection =  "column";
+    document.getElementById("buttonContainer").appendChild(formContainer);
+
+}
+
+async function isToken(){
+    const token = await chrome.storage.local.get(["token"])
+    if(token.token){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+async function pushToSheet(){
+    console.log("here");
+    console.log(await isToken());
+    if(await isToken() == false){
+        const pushButton = document.getElementById('pushButton');
+        pushButton.style.display = 'none';
+        const newButton = document.createElement("button")
+        newButton.innerText = "You have to login first Click here to login";
+        newButton.addEventListener('click',function(){
+            doAuth();
+            location.reload();
+        })
+        document.getElementById('formContainer').appendChild(newButton);
+
+    }
+}
+
+const CLIENT_ID = "546067484138-o5h7nuv4sg2di26qruuc53ijl9uhqal0.apps.googleusercontent.com";
+const REDIRECT_URL = "http://localhost:3000/auth/google/callback";
+
+const authUrl = `
+https://accounts.google.com/o/oauth2/v2/auth?
+client_id=${CLIENT_ID}&
+response_type=code&
+redirect_uri=${encodeURIComponent(REDIRECT_URL)}&
+scope=openid%20email%20profile&
+access_type=offline&
+prompt=consent
+`;
+
+function doAuth(){
+    window.open(authUrl, "_blank");
 }

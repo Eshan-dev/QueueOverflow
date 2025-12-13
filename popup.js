@@ -61,9 +61,8 @@ function openUrl(){
     window.open(url, '_blank');
 }
 async function deleteBookmark(){
-    doAuth();
     const url = this.previousSibling.previousSibling.href;
-    console.log(url);
+    // console.log(url);
 
     const allBookmarks = await fetchBookmarks();
     const newBookmarks = allBookmarks.filter(function(bookmark){
