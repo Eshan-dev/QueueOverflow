@@ -189,22 +189,31 @@ function createSheetPopup(){
     // buttton.innerText = "Push To Sheet";
     solveStatus.placeholder = `AC/WA/TLE/Not Understood(Type here ....)`
     solveStatus.style.border = "2px solid grey" 
+    solveStatus.id = "solveStatus";
     timeTaken.placeholder = "Time Taken"
     timeTaken.style.border = "2px solid grey" 
+    timeTaken.id = "timeTaken" 
     concept.placeholder = "Concept/Topic"
     concept.style.border = "2px solid grey" 
+    concept.id = "concept" 
     framework.placeholder = "How to think about this question"
     framework.style.border = "2px solid grey" 
+    framework.id = "framework"
     form.placeholder = "to which form this question belongs"
     form.style.border = "2px solid grey" 
+    form.id = "form" 
     tatic.placeholder = "Any Quick Tricks"
     tatic.style.border = "2px solid grey" 
+    tatic.id = "tactic" 
     debug.placeholder = "Mistakes Made"
     debug.style.border = "2px solid grey" 
+    debug.id = "debug" 
     solutionSummary.placeholder = "Some Implementation details"
     solutionSummary.style.border = "2px solid grey" 
+    solutionSummary.id = "solutionSummary" 
     notes.placeholder = "Something Extra?"
     notes.style.border = "2px solid grey" 
+    notes.id = "notes" 
 
     formContainer.style.display =  "flex";
     formContainer.style.flexDirection =  "column";
@@ -236,6 +245,10 @@ async function pushToSheet(){
         document.getElementById('formContainer').appendChild(newButton);
 
     }
+    else{
+        getFormData();
+    }
+
 }
 
 const CLIENT_ID = "546067484138-o5h7nuv4sg2di26qruuc53ijl9uhqal0.apps.googleusercontent.com";
@@ -254,3 +267,18 @@ prompt=consent
 function doAuth(){
     window.open(authUrl, "_blank");
 }
+function getFormData(){
+    const problem = window.location.href;
+    const solveStatus = document.getElementById("solveStatus").value
+    const timeTaken = document.getElementById("timeTaken").value;
+    const concept = document.getElementById("concept").value
+    const framework = document.getElementById('framework').value;
+    const form = document.getElementById('form').value;
+    const tactic = document.getElementById('tactic').value;
+    const debug = document.getElementById('debug').value;
+    const solutionSummary = document.getElementById('solutionSummary').value;
+    const notes = document.getElementById('notes').value;
+    const obj = {
+        problem,solveStatus,timeTaken,concept,framework,form,tactic,debug,solutionSummary,notes};
+        console.log(obj);
+    }
