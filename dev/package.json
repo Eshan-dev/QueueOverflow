@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "auth.js",
-  
-    "scripts": {
-      "build": "vite build"
-    }
-  ,
+  "scripts": {
+    "build": "vite build"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

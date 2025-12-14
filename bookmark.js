@@ -220,7 +220,11 @@ function createSheetPopup(){
     document.getElementById("buttonContainer").appendChild(formContainer);
 
 }
-
+async function getUserData(){
+    const token = await chrome.storage.local.get(['token']);
+    const email = await chrome.storage.local.get(['email']);
+    return {email,token};
+}
 async function isToken(){
     const token = await chrome.storage.local.get(["token"])
     if(token.token){
@@ -234,6 +238,7 @@ async function pushToSheet(){
     console.log("here");
     console.log(await isToken());
     if(await isToken() == false){
+        console.log("NO Token");
         const pushButton = document.getElementById('pushButton');
         pushButton.style.display = 'none';
         const newButton = document.createElement("button")
@@ -246,7 +251,14 @@ async function pushToSheet(){
 
     }
     else{
-        getFormData();
+        const formData = getFormData();
+        const userData = await getUserData();
+
+        console.log(userData);
+        console.log(formData);
+        chrome.runtime.sendMessage({ type: "addToSheet", formData,userData }, (res) => {
+            console.log(res.data);
+          });
     }
 
 }
@@ -279,6 +291,7 @@ function getFormData(){
     const solutionSummary = document.getElementById('solutionSummary').value;
     const notes = document.getElementById('notes').value;
     const obj = {
-        problem,solveStatus,timeTaken,concept,framework,form,tactic,debug,solutionSummary,notes};
-        // console.log(obj);
+        problem,solveStatus,timeTaken,concept,framework,form,tactic,debug,solutionSummary,notes
+    };
+        return obj;
     }

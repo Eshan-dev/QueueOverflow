@@ -8,6 +8,9 @@
     "storage",
     "tabs"
   ],
+  "host_permissions": [
+    "http://localhost:3000/*"
+  ],
   "content_scripts": [
     {
       "matches": [
