@@ -214,11 +214,11 @@ function createSheetPopup(){
     notes.placeholder = "Something Extra?"
     notes.style.border = "2px solid grey" 
     notes.id = "notes" 
-
+    
     formContainer.style.display =  "flex";
     formContainer.style.flexDirection =  "column";
     document.getElementById("buttonContainer").appendChild(formContainer);
-
+    
 }
 async function getUserData(){
     const token = await chrome.storage.local.get(['token']);
@@ -245,22 +245,51 @@ async function pushToSheet(){
         newButton.innerText = "You have to login first Click here to login";
         newButton.addEventListener('click',function(){
             doAuth();
-            location.reload();
         })
         document.getElementById('formContainer').appendChild(newButton);
-
+        
     }
     else{
         const formData = getFormData();
         const userData = await getUserData();
-
+        
         console.log(userData);
         console.log(formData);
         chrome.runtime.sendMessage({ type: "addToSheet", formData,userData }, (res) => {
-            console.log(res.data);
-          });
+            console.log(res);
+            if(res.data.success == false){
+                const pushButton = document.getElementById('pushButton');
+                pushButton.style.display = 'none';
+                const newButton = document.createElement("button")
+                newButton.innerText = "You have to login first Click here to login";
+                newButton.addEventListener('click',function(){
+                    doAuth();
+                })
+                document.getElementById('formContainer').appendChild(newButton);
+                
+                
+            }
+            else {
+                document.getElementById("solveStatus").style.display = 'none'
+                document.getElementById("timeTaken").style.display = 'none';
+                document.getElementById("concept").style.display = 'none'
+                document.getElementById('framework').style.display = 'none';
+                document.getElementById('form').style.display = 'none';
+                document.getElementById('tactic').style.display = 'none';
+                document.getElementById('debug').style.display = 'none';
+                document.getElementById('solutionSummary').style.display = 'none';
+                document.getElementById('notes').style.display = 'none';
+                // document.getElementById('sheet-icon').style.display = 'none';
+                const pushButton = document.getElementById('pushButton');
+                pushButton.style.display = 'none';
+                // const sheetButton = document.getElementById('sheet-icon');
+                sheetButton.innerText = "Added To Sheet";
+                sheetButton.removeEventListener('click',createSheetPopup)
+                
+            }
+        });
     }
-
+    
 }
 
 const CLIENT_ID = "546067484138-o5h7nuv4sg2di26qruuc53ijl9uhqal0.apps.googleusercontent.com";
@@ -278,6 +307,7 @@ prompt=consent
 
 function doAuth(){
     window.open(authUrl, "_blank");
+    location.reload();
 }
 function getFormData(){
     const problem = window.location.href;
