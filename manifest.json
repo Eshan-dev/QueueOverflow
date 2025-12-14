@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "QueueOverflow",
+  "version": "0.1",
+  "author": "Eshan ",
+  "description": "This extension stores a list of dsa problems you want to solve later from various websites like LeetCode, GeeksforGeeks, etc. and helps you keep track of them.",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://maang.in/*",
+        "https://leetcode.com/*",
+        "https://www.geeksforgeeks.org/*",
+        "https://cses.fi/*",
+        "https://www.codechef.com/*"
+
+      ],
+      "js": [
+        "dist/content.js"
+      ]
+      ,
+      "type": "module"
+    }
+  ],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "web_accessible_resources" : [
+    {
+      "resources": [
+        "assets/*.png",
+        "bookmark.js" 
+      ],
+      "matches" : ["<all_urls>"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/ext-icon.png",
+      "24": "assets/ext-icon.png",
+      "32": "assets/ext-icon.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "QueueOverflow"
+    ,
+    "permissions": [
+      "identity"
+    ]
+  
+  }
+}
