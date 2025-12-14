@@ -2,6 +2,12 @@ const playIcon = chrome.runtime.getURL("assets/play.png");
 const deleteIcon = chrome.runtime.getURL("assets/delete.png");
 const key = "xxxSecretxxx";
 
+const exportContainer = document.getElementById('expCnt');
+const exportText = document.createElement('a');
+exportText.innerText = "Click Here to Download Excel Sheet"
+exportContainer.appendChild(exportText);
+exportContainer.addEventListener('click',getSheets);
+
 function fetchBookmarks(){
     return new Promise(function(resolve,reject){
         chrome.storage.local.get([key],function(result){
@@ -85,5 +91,38 @@ prompt=consent
 `;
 
 function doAuth(){
-    chrome.tabs.create({ url: authUrl });
+    window.open(authUrl, "_blank");
+}
+async function getUserData(){
+    const token = await chrome.storage.local.get(['token']);
+    const email = await chrome.storage.local.get(['email']);
+    return {email,token};
+}
+async function getSheets(){
+    exportText.innerText = "Fetching ..."
+
+    const userData = await getUserData();
+    chrome.runtime.sendMessage({ type: "EXPORT_EXCEL",  userData},function(res){
+        console.log(res.buffer);
+        console.log(res.data);
+        console.log(res.type);
+        if (res.success === true) {
+            console.log("byteLength:", res.buffer?.byteLength);
+          
+            const blob = new Blob([res.buffer], {
+              type: res.type
+            });
+            const a = document.createElement("a");
+            a.href = res.dataUrl;
+            a.download = "data.xlsx";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          }
+        else{
+            exportText.innerText = "You have to Login First"
+            exportContainer.removeEventListener('click', getSheets);
+            exportContainer.addEventListener('click',doAuth);
+        }
+    })
 }
