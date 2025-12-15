@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "QueueOverflow",
   "version": "0.1",
+  "key" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2IXoETHt10Ursh0npEjuRihmXa56Ma/8zl0mbsol3qgtHryR17bSj7uo3pKIvP+p5q6CEX0YC0ODl1aRGTGCDkLr+8vYOs3RNy2bCwUBvCrtK4bRleBF4KW1+quGHLsDcyeaNG3YzjdeaSW/CKz9iVhyQZjyKDG8MXJhdQDXYQpDuCq9RGFG9LaxdRcqikGKNDOhS+jx/wnj+8bqwJ7KAYYXfmGa4p83pyZXV+GbzsZugkdgLHOeaa/6xuIk19qGD2N5u9RV5asfhcSTeYnkCa6s+sJYXQAP9Zntny6kPrw2NeTyAycSpwTk1LRHmrvlkBqKsysT27dsqKv/FgGWwwIDAQAB",
   "author": "Eshan ",
   "description": "This extension stores a list of dsa problems you want to solve later from various websites like LeetCode, GeeksforGeeks, etc. and helps you keep track of them.",
   "permissions": [
@@ -9,7 +10,7 @@
     "tabs"
   ],
   "host_permissions": [
-    "http://localhost:3000/*"
+    "https://queue-overflow-backend.onrender.com/*"
   ],
   "content_scripts": [
     {

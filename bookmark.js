@@ -1,6 +1,5 @@
 const bookmarkButton = document.createElement('button');
 const sheetButton = document.createElement('button');
-
 bookmarkButton.id = "bookmark-icon";
 sheetButton.id = "sheet-icon";
 
@@ -16,6 +15,7 @@ sheetButton.innerText = "Add to Sheet";
 const key = "xxxSecretxxx";
 
 export function startObserving(){
+    
     const observer = new MutationObserver(function(){
         // observer.disconnect(); 
         diaplaySaveProblemButton();
@@ -267,6 +267,7 @@ async function pushToSheet(){
         newButton.addEventListener('click',function(){
             doAuth();
         })
+        newButton.style.border = "2px solid grey";
         document.getElementById('formContainer').appendChild(newButton);
         
     }
@@ -284,10 +285,13 @@ async function pushToSheet(){
 
                 const newButton = document.createElement("button")
                 newButton.innerText = "You have to login first Click here to login";
-                newButton.style.setProperty("border", "2px solid grey", "important");
+                // newButton.style.setProperty("bor
+                // der", "2px solid grey", "important");
                 newButton.addEventListener('click',function(){
                     doAuth();
+
                 })
+                newButton.style.border = "2px solid grey";
                 document.getElementById('formContainer').appendChild(newButton);
                 
                 
