@@ -112,8 +112,9 @@ function addSaveBookmarkIconToCses(buttonContainer){
     elementTarget.appendChild(buttonContainer);
 }
 function addSaveBookmarkIconToCodeChef(buttonContainer){
-    const elementTarget = document.getElementsByClassName("_fullscreen-clickable__container_10e0b_131")[0];
-    elementTarget.prepend(buttonContainer);
+    const elementTarget = document.getElementById("problem-statement");
+    console.log(elementTarget);
+    elementTarget.insertBefore(buttonContainer,elementTarget.firstChild.nextSibling)
     elementTarget.style.width =  "100%";
     elementTarget.style.justifyContent = "space-between";
     buttonContainer.style.marginLeft = "15px";
@@ -184,6 +185,7 @@ function createSheetPopup(){
     formContainer.id = "formContainer";
     
     buttton.innerText = "Push To Sheet";
+    buttton.style.border = '2px solid grey';
     buttton.id = "pushButton";
     buttton.addEventListener('click',pushToSheet);
     // buttton.innerText = "Push To Sheet";
@@ -235,6 +237,10 @@ async function isToken(){
     }
 }
 async function pushToSheet(){
+    const buttton = document.getElementById('pushButton');
+    buttton.removeEventListener('click',pushToSheet);
+    buttton.innerText = "Adding ... "
+
     console.log("here");
     console.log(await isToken());
     if(await isToken() == false){
@@ -260,8 +266,10 @@ async function pushToSheet(){
             if(res.data.success == false){
                 const pushButton = document.getElementById('pushButton');
                 pushButton.style.display = 'none';
+
                 const newButton = document.createElement("button")
                 newButton.innerText = "You have to login first Click here to login";
+                newButton.style.setProperty("border", "2px solid grey", "important");
                 newButton.addEventListener('click',function(){
                     doAuth();
                 })
@@ -285,6 +293,7 @@ async function pushToSheet(){
                 // const sheetButton = document.getElementById('sheet-icon');
                 sheetButton.innerText = "Added To Sheet";
                 sheetButton.removeEventListener('click',createSheetPopup)
+                // sheetButton.style.border = "2px solid grey"
                 
             }
         });
