@@ -26,6 +26,39 @@ html, body {
     margin: 0;
 }
 
+#expCnt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+#expCnt a {
+    color: #1d4ed8;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    background: #eef2ff;
+    transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+#expCnt a:hover {
+    background: #e0e7ff;
+    border-color: #a5b4fc;
+    transform: translateY(-1px);
+}
+
+#expCnt a:active {
+    transform: translateY(0);
+}
+
 .bookmarks-list {
     display: flex;
     flex-direction: column;
