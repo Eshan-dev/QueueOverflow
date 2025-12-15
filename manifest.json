@@ -18,7 +18,8 @@
         "https://leetcode.com/*",
         "https://www.geeksforgeeks.org/*",
         "https://cses.fi/*",
-        "https://www.codechef.com/*"
+        "https://www.codechef.com/*",
+        "https://codeforces.com/*"
 
       ],
       "js": [

@@ -63,14 +63,15 @@ function diaplaySaveProblemButton(){
     buttonContainer.appendChild(bookmarkButton);
     buttonContainer.appendChild(sheetButton);
     bookmarkButton.addEventListener('click',function(e){
-            e.currentTarget.innerText="Added to Bookmarks"
+        e.currentTarget.innerText="Added to Bookmarks"
     })
     sheetButton.addEventListener('click',createSheetPopup);
-    buttonContainer.addEventListener('click',addBookmark);
-
-
-
+    bookmarkButton.addEventListener('click',addBookmark);
+    
+    
+    
     let currentURL = window.location.href;
+    console.log(currentURL);
     
     if(currentURL.includes("maang.in/problems") == true){
         addSaveBookmarkIconToMaang(buttonContainer);
@@ -92,9 +93,17 @@ function diaplaySaveProblemButton(){
     else if(currentURL.includes("codechef.com/") == true && currentURL.includes("/problems/") == true   ){
         addSaveBookmarkIconToCodeChef(buttonContainer);
     }
+    else if(currentURL.includes('https://codeforces.com/') == true && currentURL.includes('/problem/') == true){
+        console.log("HERE");
+        addSaveBookmarkIconToCodefroces(buttonContainer);
+    }
     
 }
-
+function addSaveBookmarkIconToCodefroces(buttonContainer){
+    const list = document.getElementsByClassName('second-level-menu')[0];
+    list.style.position = 'relative';
+    list.appendChild(buttonContainer);
+}
 function addSaveBookmarkIconToMaang(buttonContainer){
     const title = document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0];
     title.parentNode.parentNode.insertBefore(buttonContainer,title.parentNode.nextSibling);
@@ -136,6 +145,12 @@ function getProblemTitle(){
     else if(window.location.href.includes("codechef.com/") == true && window.location.href.includes("/problems/") == true){
         return getProblemTitleFromCodeChef();
     }
+    else if(window.location.href.includes('https://codeforces.com/') == true && window.location.href.includes('/problem/') == true){
+        return getProblemTitleFromCodeforces();
+    }
+}
+function getProblemTitleFromCodeforces(){
+    return document.getElementsByClassName('title')[0].innerText;
 }
 function getProblemTitleFromLeetCode(){
    return document.getElementsByClassName("text-title-large")[0].firstElementChild.innerHTML;
