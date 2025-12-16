@@ -29,7 +29,7 @@ export function startObserving(){
 function getCurrentBookMarks(){
     return new Promise(function(resolve,reject){
         chrome.storage.local.get([key],function(result){
-            console.log(result[key]);
+            // console.log(result[key]);
             resolve(result[key] || []);
         })
     })
@@ -257,8 +257,9 @@ async function pushToSheet(){
     buttton.innerText = `Adding ...\nBackend is running on free tier\nIt can take upto 1 minute `
 
     console.log("here");
-    console.log(await isToken());
-    if(await isToken() == false){
+    const userData = await getUserData();
+    // console.log(await isToken());
+    if(await isToken() === false || userData.email === null){
         console.log("NO Token");
         const pushButton = document.getElementById('pushButton');
         pushButton.style.display = 'none';
@@ -273,13 +274,12 @@ async function pushToSheet(){
     }
     else{
         const formData = getFormData();
-        const userData = await getUserData();
         
-        console.log(userData);
-        console.log(formData);
+        // console.log(userData);
+        // console.log(formData);
         chrome.runtime.sendMessage({ type: "addToSheet", formData,userData }, (res) => {
             console.log(res);
-            if(res.data.success == false){
+            if(res === undefined || res === null || res.data.success === false){
                 const pushButton = document.getElementById('pushButton');
                 pushButton.style.display = 'none';
 
