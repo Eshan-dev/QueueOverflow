@@ -60,6 +60,17 @@ Add bookmarked problems to your personal sheet for organized revision tracking. 
     This step is necessary because I (the author) personally use Opera, and Opera currently blocks incoming redirects from extensions. To ensure the extension works properly on Opera as well, this manual step is required. Sorry for the inconvenience.
 
 
+# View Bookmarked items
+ I recommend pining the extension
+  ![View](/images/view.png)
+
+  1. Just click on Extension Icon. The list of bookmared items will be showed
+
+# Getting your excel sheet
+
+ 1. Click on extension icon
+ 2. Click on Download Excel sheet and wait
+  ![View2](/images/view2.png)
 
 
 ## Supported Platforms
