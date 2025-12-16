@@ -99,7 +99,7 @@ async function getUserData(){
     return {email,token};
 }
 async function getSheets(){
-    exportText.innerText = "Fetching ..."
+    exportText.innerText = `Fetching ...\nBackend is running on free tier\nIt can take upto 1 minute `
 
     const userData = await getUserData();
     chrome.runtime.sendMessage({ type: "EXPORT_EXCEL",  userData},function(res){
