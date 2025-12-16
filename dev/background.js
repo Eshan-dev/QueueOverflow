@@ -12,7 +12,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         }).then(function(response){
             console.log(response);
             sendResponse({data : response.data});
-        })
+        }).catch(function(err){
+          sendResponse({success : false,data : {success : false}})
+        });
         return true;
     }
     if (msg.type === "EXPORT_EXCEL") {
