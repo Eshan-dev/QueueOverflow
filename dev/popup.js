@@ -78,7 +78,7 @@ async function deleteBookmark(){
 }
 
 const CLIENT_ID = "546067484138-o5h7nuv4sg2di26qruuc53ijl9uhqal0.apps.googleusercontent.com";
-const REDIRECT_URL = "http://localhost:3000/auth/google/callback";
+const REDIRECT_URL = "https://queue-overflow-backend.onrender.com/auth/google/callback";
 
 const authUrl = `
 https://accounts.google.com/o/oauth2/v2/auth?

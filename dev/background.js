@@ -3,7 +3,7 @@ import axios from "axios";
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.type === "addToSheet") {
         console.log(msg.userData.email);
-        axios.post('http://localhost:3000/addProblem',msg.formData,{
+        axios.post('https://queue-overflow-backend.onrender.com/addProblem',msg.formData,{
             headers : {
                 email : msg.userData.email.email,
                 authorization : msg.userData.token.token,
@@ -18,7 +18,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.type === "EXPORT_EXCEL") {
         (async () => {
           try {
-            const res = await axios.get("http://localhost:3000/getSheet", {
+            const res = await axios.get("https://queue-overflow-backend.onrender.com/getSheet", {
               responseType: "arraybuffer",
               headers: {
                 email: msg.userData.email.email,
