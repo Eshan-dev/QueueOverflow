@@ -62,9 +62,9 @@ Add bookmarked problems to your personal sheet for organized revision tracking. 
 
 # View Bookmarked items
  I recommend pining the extension
-  ![View](/images/view.png)
 
   1. Just click on Extension Icon. The list of bookmared items will be showed
+  ![View](/images/view.png)
 
 # Getting your excel sheet
 
