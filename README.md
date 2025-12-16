@@ -22,8 +22,12 @@ One-click bookmarking on supported coding platforms. All bookmarks are stored lo
 
  1. Open any coding problem on a supported platform.
 
- 2. Click Add to Bookmark.
 
+ 2. Click Add to Bookmark.
+  ![Bookmark](/images/bookmarkQuestion.png)
+
+
+  ----------------------------------
 
 
 
@@ -36,17 +40,21 @@ Add bookmarked problems to your personal sheet for organized revision tracking. 
  1. Open a coding problem.
 
  2. Click Add to Sheet in the extension.
+  ![Add to sheet](/images/sheet1.png)
 
  3. Fill the form and click Push to sheet. 
+  ![Push to sheet](/images/sheet2.png)
 
 
 ### How to authenticate(required for sheet only)
 
  1. Click the Authenticate button in the extension.
+  ![Login step 1](/images/login1.png)
 
  2. Choose your Google account.
 
  3. You’ll be redirected to a page — copy the link from that page and Open the copied link in a new tab to complete authentication.
+  ![Login step 3](/images/login2.png)
 
     Why this extra step is required
     This step is necessary because I (the author) personally use Opera, and Opera currently blocks incoming redirects from extensions. To ensure the extension works properly on Opera as well, this manual step is required. Sorry for the inconvenience.
