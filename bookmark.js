@@ -254,7 +254,7 @@ async function isToken(){
 async function pushToSheet(){
     const buttton = document.getElementById('pushButton');
     buttton.removeEventListener('click',pushToSheet);
-    buttton.innerText = "Adding ... "
+    buttton.innerText = `Adding ...\nBackend is running on free tier\nIt can take upto 1 minute `
 
     console.log("here");
     console.log(await isToken());
