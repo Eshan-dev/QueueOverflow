@@ -13,6 +13,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
             console.log(response);
             sendResponse({data : response.data});
         }).catch(function(err){
+          console.log(err);
           sendResponse({success : false,data : {success : false}})
         });
         return true;
@@ -51,4 +52,23 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       
     
         
+  });
+  chrome.runtime.onInstalled.addListener(async (details) => {
+    console.log("installed");
+    if (details.reason !== "install") return;
+    
+    try {
+      console.log("sending request");
+      await fetch("https://queue-overflow-backend.onrender.com/install", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          version: chrome.runtime.getManifest().version
+        })
+      });
+    } catch (err) {
+      console.error("Install ping failed", err);
+    }
   });
