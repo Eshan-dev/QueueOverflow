@@ -163,7 +163,7 @@ function getProblemTitleFromGeeksForGeeks(){
     return document.getElementsByClassName("g-m-0")[0].innerText;
 }
 function getProblemTitleFromCses(){
-    constelementTarget = document.querySelector('.title-block h1');
+    const elementTarget = document.querySelector('.title-block h1');
     return elementTarget.innerText;
 }
 function getProblemTitleFromCodeChef(){
