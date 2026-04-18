@@ -105,8 +105,8 @@ function addSaveBookmarkIconToCodefroces(buttonContainer) {
     list.appendChild(buttonContainer);
 }
 function addSaveBookmarkIconToMaang(buttonContainer) {
-    const title = document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0];
-    title.parentNode.parentNode.insertBefore(buttonContainer, title.parentNode.nextSibling);
+    const title = document.getElementsByClassName("mb-4 w-full space-y-4")[0];
+    title.appendChild(buttonContainer);
 }
 function addSaveBookmarkIconToLeetCode(buttonContainer) {
     const elementTarget = document.getElementsByClassName("HTMLContent_html__0OZLp")[0];
@@ -157,7 +157,7 @@ function getProblemTitleFromLeetCode() {
 
 }
 function getProblemTitleFromMaang() {
-    return document.getElementsByClassName("coding_problem_info_heading__G9ueL")[0].innerText;
+    return document.getElementsByClassName("font-rubik text-fg-grey-primary text-xl leading-[130%] font-bold")[0].innerText;
 }
 function getProblemTitleFromGeeksForGeeks() {
     return document.getElementsByClassName("g-m-0")[0].innerText;
