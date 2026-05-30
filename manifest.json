@@ -14,15 +14,15 @@
   ],
   "content_scripts": [
     {
-      "matches": [
-        "https://maang.in/*",
-        "https://leetcode.com/*",
-        "https://www.geeksforgeeks.org/*",
-        "https://cses.fi/*",
-        "https://www.codechef.com/*",
-        "https://codeforces.com/*"
-
-      ],
+"matches": [
+  "https://maang.in/*",
+  "https://leetcode.com/*",
+  "https://www.geeksforgeeks.org/*",
+  "https://cses.fi/*",
+  "https://www.codechef.com/*",
+  "https://codeforces.com/*",
+  "https://atcoder.jp/*"
+],
       "js": [
         "dist/content.js"
       ]
