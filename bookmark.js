@@ -93,10 +93,16 @@ function diaplaySaveProblemButton() {
     else if (currentURL.includes("codechef.com/") == true && currentURL.includes("/problems/") == true) {
         addSaveBookmarkIconToCodeChef(buttonContainer);
     }
-    else if (currentURL.includes('https://codeforces.com/') == true && currentURL.includes('/problem/') == true) {
-        console.log("HERE");
-        addSaveBookmarkIconToCodefroces(buttonContainer);
-    }
+else if (currentURL.includes('https://codeforces.com/') == true && currentURL.includes('/problem/') == true) {
+    console.log("HERE");
+    addSaveBookmarkIconToCodefroces(buttonContainer);
+}
+else if (
+    currentURL.includes("atcoder.jp") &&
+    currentURL.includes("/tasks/")
+) {
+    addSaveBookmarkIconToAtCoder(buttonContainer);
+}
 
 }
 function addSaveBookmarkIconToCodefroces(buttonContainer) {
@@ -128,6 +134,16 @@ function addSaveBookmarkIconToCodeChef(buttonContainer) {
     elementTarget.style.justifyContent = "space-between";
     buttonContainer.style.marginLeft = "15px";
 }
+function addSaveBookmarkIconToAtCoder(buttonContainer) {
+
+    const taskStatement = document.getElementById("task-statement");
+
+    if (!taskStatement) return;
+
+    taskStatement.prepend(buttonContainer);
+
+    buttonContainer.style.marginBottom = "15px";
+}
 
 function getProblemTitle() {
     if (window.location.href.includes("maang.in/problems")) {
@@ -148,6 +164,13 @@ function getProblemTitle() {
     else if (window.location.href.includes('https://codeforces.com/') == true && window.location.href.includes('/problem/') == true) {
         return getProblemTitleFromCodeforces();
     }
+    else if (
+    window.location.href.includes("atcoder.jp") &&
+    window.location.href.includes("/tasks/")
+) {
+    return getProblemTitleFromAtCoder();
+}
+    return document.title;
 }
 function getProblemTitleFromCodeforces() {
     return document.getElementsByClassName('title')[0].innerText;
@@ -169,6 +192,18 @@ function getProblemTitleFromCses() {
 function getProblemTitleFromCodeChef() {
     const elementTarget = document.getElementById("problem-statement");
     return elementTarget.firstElementChild.innerText;
+}
+function getProblemTitleFromAtCoder() {
+
+    const title = document.querySelector("#task-statement .h2");
+
+    if (title) {
+        return title.innerText.trim();
+    }
+
+    return document.title
+        .replace(" - AtCoder", "")
+        .trim();
 }
 function createSheetPopup() {
     if (document.getElementById('formContainer')) {
